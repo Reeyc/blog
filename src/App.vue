@@ -4,6 +4,7 @@
     <div class="main">
       <router-view />
     </div>
+    <comment v-if="$route.name==='article'"></comment>
     <Footer class="footer"></Footer>
     <back-top :visibility-height="100" :back-position="0" transition-name="fade" />
   </div>
@@ -12,10 +13,11 @@
 <script>
 import Header from "comm/Header/Header";
 import Footer from "comm/Footer/Footer";
+import Comment from "comm/Comment/Comment";
 import BackTop from "comm/BackTop/BackTop";
 export default {
   name: "App",
-  components: { Header, Footer, BackTop }
+  components: { Header, Footer, Comment, BackTop }
 };
 </script>
 
@@ -50,7 +52,7 @@ html, body
 code, pre
   color: #e4e7ed
   background-color: #263238
-  font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace
+  font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace !important
 // 浏览器文本选中颜色&背景色
 ::selection
   background: $theme-color
@@ -61,6 +63,11 @@ code, pre
 ::-webkit-selection
   background: $theme-color
   color: #f5f5f5
+//警告框样式
+@media (max-width: 500px)
+  .myConfirm
+    min-width: 300px !important
+    max-width: 300px !important
 @media (min-width: 992px)
   .main
     width: 66.66667%

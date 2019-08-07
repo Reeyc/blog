@@ -76,8 +76,6 @@ export default {
   margin-top: 15px
   .container
     flex-wrap: wrap
-    animation: fade-in
-    animation-duration: 0.5s
     .item
       position: relative
       margin: 10px 0
@@ -131,11 +129,4 @@ export default {
               border-width: 0 0 10px 15px
               border-style: solid
               border-color: transparent transparent $theme-color
-@keyframes fade-in
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0)
-    opacity: 1
 </style>

@@ -3,6 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const Home = r => require.ensure([], () => r(require('@/components/Home/Home')), 'Home')
+const Search = r => require.ensure([], () => r(require('@/components/Search/Search')), 'Search')
+const Archives = r => require.ensure([], () => r(require('@/components/Archives/Archives')), 'Archives')
+const Layout = r => require.ensure([], () => r(require('@/components/Layout/Layout')), 'Layout')
+const Javascript = r => require.ensure([], () => r(require('@/components/Javascript/Javascript')), 'Javascript')
+const Utils = r => require.ensure([], () => r(require('@/components/Utils/Utils')), 'Utils')
+const Article = r => require.ensure([], () => r(require('@/common/Article/Article')), 'Article')
+
 export default new Router({
   routes: [{
     path: '/',
@@ -10,31 +18,31 @@ export default new Router({
   }, {
     path: '/home',
     name: 'home',
-    component: r => require(["@/components/Home/Home"], r)
+    component: Home
   }, {
     path: '/search',
     name: 'search',
-    component: r => require(["@/components/Search/Search"], r)
+    component: Search
   }, {
     path: '/archives',
     name: 'archives',
-    component: r => require(["@/components/Archives/Archives"], r)
+    component: Archives
   }, {
     path: '/layout',
     name: 'layout',
-    component: r => require(["@/components/Layout/Layout"], r)
+    component: Layout
   }, {
     path: '/javascript',
     name: 'javascript',
-    component: r => require(["@/components/Javascript/Javascript"], r)
+    component: Javascript
   }, {
     path: '/utils',
     name: 'utils',
-    component: r => require(["@/components/Utils/Utils"], r)
+    component: Utils
   }, {
     path: '/article/:id',
     name: 'article',
-    component: r => require(["@/common/Article/Article"], r)
+    component: Article
   }],
   scrollBehavior(to, from, savedPosition) {
     return {
