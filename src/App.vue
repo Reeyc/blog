@@ -63,7 +63,7 @@ code, pre
 ::-webkit-selection
   background: $theme-color
   color: #f5f5f5
-//警告框样式
+// 警告框样式
 @media (max-width: 500px)
   .myConfirm
     min-width: 300px !important

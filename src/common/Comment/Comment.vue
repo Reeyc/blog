@@ -6,6 +6,8 @@
           <el-input
             v-model="name"
             size="medium"
+            maxlength="10"
+            show-word-limit
             prefix-icon="el-icon-user"
             clearable
             placeholder="你的大名..."
@@ -15,6 +17,8 @@
           <el-input
             v-model="email"
             size="medium"
+            maxlength="30"
+            show-word-limit
             prefix-icon="el-icon-message"
             clearable
             placeholder="你的邮箱..."
@@ -26,6 +30,7 @@
         type="textarea"
         :rows="7"
         resize="none"
+        maxlength="500"
         clearable
         placeholder="期待你的留言..."
       ></el-input>

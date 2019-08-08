@@ -24,8 +24,8 @@ http.interceptors.request.use(
   config => {
     loading = Loading.service({
       lock: true,
-      text: 'loading……',
-      background: 'rgba(0, 0, 0, 0.5)',
+      text: 'loading...',
+      background: 'rgba(0, 0, 0, 0.5)'
     });
     return config;
   },

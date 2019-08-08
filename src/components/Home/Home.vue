@@ -28,10 +28,12 @@
 
 <script>
 import Pagination from "comm/Pagination/Pagination";
+import { cate } from "js/format";
 export default {
   data() {
     return {
       article: [],
+      cateFormat: cate,
       cardBodyStyle: {
         padding: "0",
         overflow: "hidden"
@@ -39,19 +41,6 @@ export default {
     };
   },
   methods: {
-    cateFormat(cate) {
-      if (!cate) return;
-      switch (Number(cate)) {
-        case 1:
-          return "Layout";
-        case 2:
-          return "JavaScript";
-        case 3:
-          return "Utils";
-        default:
-          return "Unknown";
-      }
-    },
     toArticle(id) {
       this.$router.push({
         name: "article",

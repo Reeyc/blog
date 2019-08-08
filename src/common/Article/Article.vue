@@ -5,10 +5,12 @@
       <p class="article-title">{{article.title}}</p>
       <p
         class="article-info"
-      >发表于：2019-06-15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布在：Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论：0 条评论</p>
+      >发表于：{{article.create}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布在：{{cateFormat(article.category)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论：0 条评论</p>
     </div>
     <div class="article-content">
       <div v-html="article.content"></div>
+      <br />
+      <div v-if="article.update" class="update">文章最后更新于：{{article.update}}</div>
     </div>
     <ul class="comment-list">
       <li v-for="item of 3" :key="item" class="item">
@@ -25,10 +27,12 @@
 
 <script>
 import hljs from "highlight.js";
+import { cate } from "js/format";
 export default {
   data() {
     return {
-      article: {}
+      article: {},
+      cateFormat: cate
     };
   },
   created() {
@@ -47,8 +51,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     document.body.style.backgroundColor = "#f3f3f3";
     next();
-  },
-  components: {}
+  }
 };
 </script>
 

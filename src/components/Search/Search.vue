@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="search">
-      <el-input v-model="val" placeholder="Search..." class="input"></el-input>
+      <el-input v-model="val" maxlength="30" placeholder="Search..." class="input"></el-input>
       <i class="el-icon-search icon"></i>
     </div>
     <p class="tips">

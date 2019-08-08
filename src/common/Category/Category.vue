@@ -18,6 +18,7 @@
 
 <script>
 import Pagination from "comm/Pagination/Pagination";
+import { cate } from "js/format";
 export default {
   props: {
     category: {
@@ -27,27 +28,12 @@ export default {
   },
   data() {
     return {
-      c: null
+      c: null,
+      cateFormat: cate
     };
   },
-  methods: {
-    CategoryFormat(data) {
-      if (!data) return;
-      switch (data) {
-        case 1:
-          return "Layout";
-          break;
-        case 2:
-          return "JavaScript";
-          break;
-        case 3:
-          return "Utils";
-          break;
-      }
-    }
-  },
   created() {
-    this.c = this.CategoryFormat(this.category);
+    this.c = this.cateFormat(this.category);
   },
   components: { Pagination }
 };
