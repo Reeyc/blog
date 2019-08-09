@@ -57,8 +57,6 @@ export default {
 @import '~css/variable.styl'
 .container
   padding: 40px 0
-  animation: fade-in
-  animation-duration: 0.5s
   .search
     width: 60%
     margin: 0 auto
@@ -109,13 +107,6 @@ export default {
       cursor: pointer
       &:hover
         color: $theme-color
-@keyframes fade-in
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0)
-    opacity: 1
 @media (max-width: 767px)
   .search
     width: 80% !important

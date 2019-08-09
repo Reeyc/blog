@@ -10,6 +10,7 @@ const Layout = r => require.ensure([], () => r(require('@/components/Layout/Layo
 const Javascript = r => require.ensure([], () => r(require('@/components/Javascript/Javascript')), 'Javascript')
 const Utils = r => require.ensure([], () => r(require('@/components/Utils/Utils')), 'Utils')
 const Article = r => require.ensure([], () => r(require('@/common/Article/Article')), 'Article')
+const NotFound = r => require.ensure([], () => r(require('@/common/NotFound/NotFound')), 'NotFound')
 
 export default new Router({
   routes: [{
@@ -43,6 +44,10 @@ export default new Router({
     path: '/article/:id',
     name: 'article',
     component: Article
+  }, {
+    path: '*',
+    name: 'notfount',
+    component: NotFound
   }],
   scrollBehavior(to, from, savedPosition) {
     return {

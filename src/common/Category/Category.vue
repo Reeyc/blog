@@ -44,8 +44,6 @@ export default {
 @import '~css/mixins.styl'
 .container
   padding: 10px 20px
-  animation: fade-in
-  animation-duration: 0.5s
   .category
     font-size: 20px
     line-height: 30px
@@ -70,11 +68,4 @@ export default {
           color: #5f5f5f
           font-size: 12px
           ellipsis()
-@keyframes fade-in
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0)
-    opacity: 1
 </style>

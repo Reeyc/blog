@@ -8,8 +8,6 @@ import "css/reset.css"
 import "css/border.css"
 import "css/iconfont.css"
 
-import 'highlight.js/styles/An-Old-Hope.css' //代码块选择 An-Old-Hope 主题颜色
-
 //#################################
 
 import http from 'api'
@@ -19,6 +17,19 @@ Vue.prototype.$http = http
 
 import fastClick from 'fastclick'
 fastClick.attach(document.body);
+
+//#################################
+
+import hljs from "highlight.js";
+import 'highlight.js/styles/An-Old-Hope.css' //代码块选择 An-Old-Hope 主题颜色
+
+//自定义指令 
+Vue.directive('highlight', function (el) {
+  let blocks = el.querySelectorAll('pre');
+  blocks.forEach((block) => {
+    hljs.highlightBlock(block)
+  })
+})
 
 //#################################
 
@@ -80,6 +91,7 @@ Vue.prototype.$loading = Loading.service;
 
 //#################################
 
+Vue.prototype.$bus = new Vue();
 Vue.config.productionTip = false
 
 new Vue({
