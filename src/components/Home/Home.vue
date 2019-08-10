@@ -1,3 +1,4 @@
+<!-- page of home -->
 <template>
   <div class="home">
     <el-row type="flex" justify="space-around" class="container">
@@ -5,7 +6,7 @@
         :span="21"
         :sm="11"
         :md="7"
-        v-for="item of article"
+        v-for="item of filterData"
         :key="item.id"
         @click.native="toArticle(item.id)"
         class="item"
@@ -19,18 +20,23 @@
           <div class="slant"></div>
           <div class="des">
             <p class="title">{{item.title}}</p>
-            <p class="category">{{ cateFormat(item.category) }}</p>
+            <p
+              class="category"
+              @click.prevent.stop="toDiary(item.category)"
+            >{{ cate(item.category) }}</p>
           </div>
         </el-card>
       </el-col>
+      <el-col :span="21" :sm="11" :md="7"></el-col>
+      <el-col :span="21" :sm="11" :md="7"></el-col>
     </el-row>
-    <pagination :total="article.length" :page-size="10"></pagination>
+    <pagination :total="article.length" :pageSize="18" @curChange="curChange"></pagination>
   </div>
 </template>
 
 <script>
 import Pagination from "comm/Pagination/Pagination";
-import { cate } from "js/format";
+import { cateFormat } from "js/cate";
 export default {
   props: {
     article: {
@@ -40,7 +46,8 @@ export default {
   },
   data() {
     return {
-      cateFormat: cate,
+      cate: cateFormat,
+      curPage: 1, //当前页码
       cardBodyStyle: {
         padding: "0",
         overflow: "hidden",
@@ -48,12 +55,34 @@ export default {
       }
     };
   },
+  computed: {
+    filterData() {
+      //从第1页到上一页的表单数据
+      const oldData = (this.curPage - 1) * 18;
+      //从第1页到当前页的表单数据
+      const newData = this.curPage * 18;
+      //截取上一页到当前页的表单数据
+      return this.article.slice(oldData, newData);
+    }
+  },
   methods: {
+    //路由跳转文章页
     toArticle(id) {
       this.$router.push({
         name: "article",
         params: { id }
       });
+    },
+    //路由跳转分类页
+    toDiary(category) {
+      this.$router.push({
+        name: "diary",
+        query: { category }
+      });
+    },
+    //根据当前页码改变数据
+    curChange(page) {
+      this.curPage = page;
     }
   },
   components: { Pagination }
@@ -93,7 +122,7 @@ export default {
           position: absolute
           z-index: 0
           right: 0
-          bottom: 25px
+          bottom: 10px
           left: 0
           width: 110%
           min-height: 100px
@@ -136,6 +165,8 @@ export default {
             border-width: 0 0 10px 15px
             border-style: solid
             border-color: transparent transparent $theme-color
+          &:hover
+            color: $theme-color
 @keyframes fade-in
   0%
     transform: translateY(20px)

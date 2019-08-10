@@ -22,8 +22,7 @@ export default {
     return { article: null };
   },
   created() {
-    // 1. 大多数页面都需要all_article数据，直接在app.vue里面获取再传值，避免多个页面重复请求
-    // 缺点在于路由切换不会实时获取数据，刷新是可以的
+    // 1. 大多数页面都需要all_article数据，在这里获取再传值，避免多个页面重复请求，缺点是路由切换不会实时获取数据，但刷新可以
     this.$http.article.all_Article().then(res => {
       if (!res || res.code !== 1) return;
       this.article = res.article;
@@ -35,6 +34,7 @@ export default {
 
 <style lang="stylus">
 @import '~css/variable.styl'
+@import '~css/common.styl'
 html, body
   background-color: #f3f3f3
   width: 100%
@@ -56,42 +56,4 @@ html, body
       animation-duration: 0.5s
   .footer
     background-color: #fff
-// http进度条样式
-#nprogress .bar
-  background: $theme-color !important
-// 文章代码块样式
-.ql-syntax
-  padding: 20px !important
-  margin: 10px 0
-  border-radius: 5px
-  overflow: auto
-  background-color: #263238 !important
-code, pre
-  color: #e4e7ed
-  font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace !important
-// 浏览器文本选中颜色&背景色
-::selection
-  background: $theme-color
-  color: #f5f5f5
-::-moz-selection
-  background: $theme-color
-  color: #f5f5f5
-::-webkit-selection
-  background: $theme-color
-  color: #f5f5f5
-@keyframes fade-in
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0)
-    opacity: 1
-// 警告框样式
-@media (max-width: 500px)
-  .myConfirm
-    min-width: 300px !important
-    max-width: 300px !important
-@media (min-width: 992px)
-  .main
-    width: 66.66667%
 </style>

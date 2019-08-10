@@ -81,6 +81,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~css/mixins.styl'
 .comment
   background-color: #f7f7f7
   .container
@@ -93,21 +94,8 @@ export default {
       align-items: center
       .item
         margin: 0 5px 10px
-    // 修改placeholder占位文本颜色
     &>>>.el-input__inner, &>>>.el-textarea__inner
-      border-radius: 5px
-      &::-webkit-input-placeholder
-        color: #9f9f9f
-        font-size: 13px
-      &:-moz-placeholder
-        color: #9f9f9f
-        font-size: 13px
-      &::-moz-placeholder
-        color: #9f9f9f
-        font-size: 13px
-      &:-ms-input-placeholder
-        color: #9f9f9f
-        font-size: 13px
+      input-color(4px, 13px)
     .submit
       position: absolute
       bottom: 60px

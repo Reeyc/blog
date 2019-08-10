@@ -1,3 +1,4 @@
+<!-- page of archives -->
 <template>
   <div class="container">
     <el-timeline>
@@ -5,7 +6,7 @@
       <el-timeline-item
         v-for="item of data"
         :key="item.time"
-        :timestamp="item.time"
+        :timestamp="item.date"
         placement="top"
         icon="el-icon-s-promotion"
         size="large"
@@ -16,12 +17,12 @@
           <el-card
             v-for="e of item.content"
             :key="e.id"
-            @click.native="toArticle(item.id)"
+            @click.native="toArticle(e.id)"
             class="item"
           >
             <div class="title">{{e.title}}</div>
-            <span class="category">
-              {{ format(e.category) }}
+            <span @click.prevent.stop="toDiary(e.category)" class="category">
+              {{ cate(e.category) }}
               <i class="el-icon-edit"></i>
             </span>
           </el-card>
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import { cate } from "js/format";
+import { cateFormat } from "js/cate";
 export default {
   props: {
     article: {
@@ -43,7 +44,7 @@ export default {
   data() {
     return {
       data: [],
-      format: cate
+      cate: cateFormat
     };
   },
   methods: {
@@ -52,25 +53,32 @@ export default {
       if (!data || !Array.isArray(data)) return;
       const result = [];
       data.reduce((prve, cur) => {
-        const time = cur.create.slice(0, 10);
-        if (prve !== time) {
+        const date = cur.create.slice(0, 10);
+        if (prve !== date) {
           //非同一天
-          result.push({ time: cur.create, content: [cur] });
+          result.push({ date, content: [cur] });
         } else {
           //同一天
           result.forEach(item => {
-            if (item.time.slice(0, 10) === time) item.content.push(cur);
+            if (item.date.slice(0, 10) === date) item.content.push(cur);
           });
         }
         return cur.create.slice(0, 10);
       }, []);
       return result;
     },
-    //路由跳转
+    //路由跳转文章页
     toArticle(id) {
       this.$router.push({
         name: "article",
         params: { id }
+      });
+    },
+    //路由跳转分类页
+    toDiary(category) {
+      this.$router.push({
+        name: "diary",
+        query: { category }
       });
     }
   },

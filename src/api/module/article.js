@@ -17,5 +17,14 @@ export default {
         id
       }
     })
+  },
+  //分类范围文章
+  range_article(min, max) {
+    return axios.get(base.range, {
+      params: {
+        min,
+        max
+      }
+    })
   }
 };

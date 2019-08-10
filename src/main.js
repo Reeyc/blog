@@ -51,46 +51,6 @@ router.afterEach(() => NProgress.done())
 
 //#################################
 
-import {
-  Pagination,
-  Autocomplete,
-  Input,
-  Button,
-  Timeline,
-  TimelineItem,
-  Row,
-  Col,
-  Card,
-  Divider,
-  MessageBox,
-  Message,
-  Loading
-} from 'element-ui';
-
-
-Vue.use(Pagination);
-Vue.use(Autocomplete);
-Vue.use(Input);
-Vue.use(Button);
-Vue.use(Timeline);
-Vue.use(TimelineItem);
-Vue.use(Row);
-Vue.use(Col);
-Vue.use(Card);
-Vue.use(Divider);
-
-import 'element-ui/lib/theme-chalk/base.css';
-import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
-Vue.component(CollapseTransition.name, CollapseTransition)
-
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
-Vue.prototype.$confirm = MessageBox.confirm;
-Vue.prototype.$message = Message;
-Vue.prototype.$loading = Loading.service;
-
-//#################################
-
 Vue.prototype.$bus = new Vue();
 Vue.config.productionTip = false
 

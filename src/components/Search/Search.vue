@@ -1,3 +1,4 @@
+<!-- page of search -->
 <template>
   <div class="container">
     <div class="search">
@@ -55,6 +56,7 @@ export default {
 
 <style lang="stylus" scoped>
 @import '~css/variable.styl'
+@import '~css/mixins.styl'
 .container
   padding: 40px 0
   .search
@@ -63,20 +65,9 @@ export default {
     position: relative
     .input
       text-align: center
-      font-size: 14px
       font-family: Arial, 'Microsoft YaHei'
       & >>> .el-input__inner
-        border: 1px solid rgba(184, 197, 214, 0.2)
-        border-radius: 25px
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04)
-        &::-webkit-input-placeholder // 修改placeholder占位文本颜色
-          color: #5f5f5f
-        &:-moz-placeholder
-          color: #5f5f5f
-        &::-moz-placeholder
-          color: #5f5f5f
-        &:-ms-input-placeholder
-          color: #5f5f5f
+        input-color(25px, 14px)
     .icon
       position: absolute
       top: 50%

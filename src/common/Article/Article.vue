@@ -6,7 +6,7 @@
         <p class="article-title">{{article.title}}</p>
         <div class="article-info">
           <div class="create">发表于：{{article.create}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          <div class="category">发布在：{{cateFormat(article.category)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div class="category">发布在：{{cate(article.category)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           <div class="comme">评论：0 条评论</div>
         </div>
       </div>
@@ -29,18 +29,18 @@
     <div v-else class="not-article">
       <h2 class="tips">抱歉，您查看的文章已丢失，请浏览其他文章...</h2>
       <el-button type="text" @click="back">点此返回>></el-button>
-      <img src="../../assets/img/404.jpg" alt />
+      <img src="../../assets/img/404.jpg" class="tips-img" />
     </div>
   </div>
 </template>
 
 <script>
-import { cate } from "js/format";
+import { cateFormat } from "js/cate";
 export default {
   data() {
     return {
       article: { notFound: false },
-      cateFormat: cate
+      cate: cateFormat
     };
   },
   methods: {
@@ -119,15 +119,12 @@ export default {
           top: 8px
           right: 8px
 .not-article
-  display: flex
-  justify-content: center
-  flex-wrap: wrap
+  text-align: center
   .tips
     width: 100%
     font-size: 22px
     margin: 50px 0 10px
-    text-align: center
-  img
+  .tips-img
     width: 100%
 @media (max-width: 500px)
   .article
@@ -139,3 +136,11 @@ export default {
     .tips
       font-size: 14px
 </style>
+<style lang="stylus">
+.article-content
+  img
+    max-width: 100% !important
+    width: 100% !important
+</style>
+
+

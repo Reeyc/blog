@@ -28,10 +28,9 @@ export default {
       isShow: false,
       routerPath: [
         { path: "/home", value: "Home" },
-        { path: "/layout", value: "Layout" },
-        { path: "/javascript", value: "JavaScript" },
-        { path: "/utils", value: "Utils" },
-        { path: "/archives", value: "Archives" }
+        { path: "/diary", value: "Diary" },
+        { path: "/archives", value: "Archives" },
+        { path: "/about", value: "About" }
       ]
     };
   },

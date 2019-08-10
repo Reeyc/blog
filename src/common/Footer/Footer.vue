@@ -1,13 +1,9 @@
 <template>
-  <div class="footer">
+  <div v-if="article" class="footer">
     <ul class="nav-menu border-bottom">
-      <li>Layout</li>
-      <el-divider direction="vertical"></el-divider>
-      <li>JavaScript</li>
-      <el-divider direction="vertical"></el-divider>
-      <li>Utils</li>
-      <el-divider direction="vertical"></el-divider>
-      <li>Archives</li>
+      <li v-for="item of routerPath" :key="item.value" class="border-right">
+        <router-link :to="item.path">{{item.value}}</router-link>
+      </li>
     </ul>
     <el-row type="flex" justify="center" class="copyright">
       <el-col :span="7" :xs="20" :md="5" class="item">
@@ -20,7 +16,11 @@
       <el-col :span="7" :xs="0" :md="5" class="item">
         <dl>
           <dt>最新文章</dt>
-          <dd v-for="item of article" :key="item.id" @click="toArticle(item.id)">{{item.title}}</dd>
+          <dd
+            v-for="item of article.slice(0,5)"
+            :key="item.id"
+            @click="toArticle(item.id)"
+          >{{item.title}}</dd>
         </dl>
       </el-col>
       <el-col :span="7" :xs="0" :md="5" class="item">
@@ -41,6 +41,16 @@ export default {
       default: []
     }
   },
+  data() {
+    return {
+      routerPath: [
+        { path: "/home", value: "Home" },
+        { path: "/diary", value: "Diary" },
+        { path: "/archives", value: "Archives" },
+        { path: "/about", value: "About" }
+      ]
+    };
+  },
   methods: {
     toArticle(id) {
       if (!id) return;
@@ -60,11 +70,16 @@ export default {
   display: flex
   justify-content: center
   align-items: center
+  padding: 25px 0
   li
-    padding: 25px
+    padding: 0 25px
     cursor: pointer
-    &:hover
-      color: $theme-color
+    &:last-child::before
+      border-right: 0
+    a
+      color: #333
+      &:hover
+        color: $theme-color
 .copyright
   .item
     padding: 30px 10px 50px

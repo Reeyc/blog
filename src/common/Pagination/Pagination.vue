@@ -5,6 +5,7 @@
     :page-size="pageSize"
     :pager-count="pageCount"
     :current-page="currentPage"
+    @current-change="handleCurrentChange"
     background
     class="pagination"
   ></el-pagination>
@@ -32,6 +33,17 @@ export default {
     currentPage: {
       type: Number,
       default: 1
+    }
+  },
+  data() {
+    return {
+      showData: []
+    };
+  },
+  methods: {
+    //当前页码发生变化，通知父组件
+    handleCurrentChange(val) {
+      this.$emit("curChange", val);
     }
   }
 };

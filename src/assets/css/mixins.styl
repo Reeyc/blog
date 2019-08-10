@@ -1,4 +1,19 @@
+// 文本溢出显示省略号
 ellipsis()
   overflow: hidden
   white-space: nowrap
-  text-overflow: ellipsis 
+  text-overflow: ellipsis
+// 输入框占位文本颜色
+input-color($circle, $fz)
+  border: 1px solid rgba(184, 197, 214, 0.2)
+  font-size: $fz
+  border-radius: $circle
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04)
+  &::-webkit-input-placeholder
+    color: #5f5f5f
+  &:-moz-placeholder
+    color: #5f5f5f
+  &::-moz-placeholder
+    color: #5f5f5f
+  &:-ms-input-placeholder
+    color: #5f5f5f
