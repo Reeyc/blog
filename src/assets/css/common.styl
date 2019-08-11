@@ -1,6 +1,14 @@
-// http进度条样式
+// 路由加载进度条样式
 #nprogress .bar
     background: $theme-color !important
+// 路由页面标题
+.crumbs
+    position: relative
+    text-transform: capitalize
+    font-size: 20px
+    line-height: 30px
+    padding-left: 3px
+    margin: 20px 10px
 // 文章代码块样式
 .ql-syntax
     padding: 20px !important
@@ -11,7 +19,7 @@
 code, pre
     color: #e4e7ed
     font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace !important
-// 浏览器文本选中颜色&背景色
+// 文本选中颜色&背景色
 ::selection
     background: $theme-color
     color: #f5f5f5
@@ -34,9 +42,12 @@ code, pre
     100%
         transform: translateY(0)
         opacity: 1
+.myMsg
+    .el-message__content
+        line-height: 1.5
 // 警告框样式
 @media (max-width: 500px)
-    .myConfirm
+    .myMsg, .myConfirm
         min-width: 300px !important
         max-width: 300px !important
 @media (min-width: 992px)

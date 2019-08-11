@@ -1,6 +1,7 @@
 <!-- page of archives -->
 <template>
-  <div class="container">
+  <div class="archives">
+    <div class="crumbs">{{$route.name}}</div>
     <el-timeline>
       <!-- 创建每个时间点档案 -->
       <el-timeline-item
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import { cateFormat } from "js/cate";
+import category from "@/mixins/category";
 export default {
   props: {
     article: {
@@ -43,10 +44,10 @@ export default {
   },
   data() {
     return {
-      data: [],
-      cate: cateFormat
+      data: []
     };
   },
+  mixins: [category],
   methods: {
     //数据处理
     handle(data) {
@@ -91,8 +92,11 @@ export default {
 <style lang="stylus" scoped>
 @import '~css/mixins.styl'
 @import '~css/variable.styl'
-.container
+.archives
   padding: 30px
+  .crumbs
+    margin 0 10px 25px
+    prefix(400)
   .content
     display: flex
     flex-wrap: wrap

@@ -2,7 +2,12 @@
 <template>
   <div class="diary">
     <div class="control">
-      <div class="crumbs">{{$route.name}}</div>
+      <!-- 标题 -->
+      <div class="crumbs">
+        <span v-if="search" class="search">Keywords： {{search}}</span>
+        <span v-else>{{$route.name}}</span>
+      </div>
+      <!-- 选择器 -->
       <el-select
         v-model="seleVal"
         size="medium"
@@ -21,8 +26,8 @@
         </el-option-group>
       </el-select>
     </div>
-
-    <el-row type="flex" justify="space-between" class="content">
+    <!-- 列表 -->
+    <el-row v-if="handledData.length" type="flex" justify="space-between" class="content">
       <el-col
         v-for="item of initData"
         :key="item.id"
@@ -42,7 +47,7 @@
       <el-col :sm="12" :lg="8"></el-col>
       <el-col :sm="12" :lg="8"></el-col>
     </el-row>
-    <div v-if="handledData.length<1" class="not-found">暂无该类型的文章，请浏览其他文章...</div>
+    <div v-if="!handledData.length" class="not-found">暂无该类型的文章，请浏览其他文章...</div>
     <pagination :total="total" :pageSize="18" @curChange="curChange"></pagination>
   </div>
 </template>
@@ -64,7 +69,8 @@ export default {
       cate: cateFormat, //格式化分类
       curPage: 1, //当前页码 (默认加载第一页)
       total: 0, //总页码数（watch当数据变化实时改变）
-      handledData: [] //处理后的数据（用于展示）
+      handledData: [], //处理后的数据（用于展示）
+      search: ""
     };
   },
   computed: {
@@ -78,7 +84,7 @@ export default {
     }
   },
   methods: {
-    //路由跳转
+    //路由跳转文章页
     toArticle(id) {
       this.$router.push({
         name: "article",
@@ -91,7 +97,8 @@ export default {
     },
     //选择器选中
     selectChange(seleVal) {
-      this.curPage = 1;
+      this.search = ""; //将搜索标识去除
+      this.curPage = 1; //跳到搜索后文章的第一页
       //选中全部
       if (seleVal === "all") {
         this.handledData = this.article;
@@ -101,6 +108,23 @@ export default {
       this.handledData = this.article.filter(item => {
         return Number(item.category) === seleVal;
       });
+    },
+    //处理路由传过来的[分类]参数
+    hanldeCategory() {
+      const category = Number(this.$route.query.category);
+      if (!category) return;
+      this.seleVal = category;
+      //仅改变变量不会触发数据筛选，还需要调用相应函数
+      this.selectChange(category);
+    },
+    //处理路由传过来的[搜索]参数
+    handleSearch() {
+      //数据在Search页面已经获取完毕
+      const result = this.$route.params.result;
+      const val = this.$route.params.val;
+      if (!result || !val) return;
+      this.handledData = result;
+      this.search = val;
     }
   },
   watch: {
@@ -114,13 +138,10 @@ export default {
     this.sele = selectCate();
     //初始化展示数据
     this.handledData = this.article;
-  },
-  mounted() {
-    const category = Number(this.$route.query.category);
-    if (category) {
-      this.seleVal = category; //只改变变量不会触发数据筛选
-      this.selectChange(category);
-    }
+    //分类筛选
+    this.hanldeCategory();
+    //搜索筛选
+    this.handleSearch();
   },
   components: { Pagination }
 };
@@ -136,12 +157,9 @@ export default {
     align-items: center
     justify-content: space-between
     .crumbs
-      text-transform: capitalize
-      font-size: 20px
-      line-height: 30px
-      padding-left: 8px
-      margin: 20px 10px 20px 0
-      border-left: 8px solid $theme-color
+      prefix(400)
+      .search
+        text-transform: none
     .select
       & >>> .el-input__inner
         input-color(4px, 14px)
@@ -167,8 +185,13 @@ export default {
   .not-found
     text-align: center
     font-size: 18px
-    margin: 20px 0
+    margin: 100px 0
+@media (max-width: 800px)
+  .crumbs
+    font-size: 18px !important
 @media (max-width: 500px)
+  .crumbs
+    font-size: 14px !important
   .not-found
     font-size: 16px !important
 </style>

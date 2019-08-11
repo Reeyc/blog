@@ -36,7 +36,7 @@
 
 <script>
 import Pagination from "comm/Pagination/Pagination";
-import { cateFormat } from "js/cate";
+import category from "@/mixins/category";
 export default {
   props: {
     article: {
@@ -46,7 +46,6 @@ export default {
   },
   data() {
     return {
-      cate: cateFormat,
       curPage: 1, //当前页码
       cardBodyStyle: {
         padding: "0",
@@ -55,6 +54,7 @@ export default {
       }
     };
   },
+  mixins: [category],
   computed: {
     filterData() {
       //从第1页到上一页的表单数据
@@ -106,7 +106,7 @@ export default {
           min-height: 200px
           background-position: center
           background-size: cover
-          transition: all 0.5
+          transition: all 0.5s
           background-color: rgba(0, 0, 0, 0.5)
         .shade // 遮罩
           position: absolute

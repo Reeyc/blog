@@ -58,11 +58,19 @@ export default {
   methods: {
     submit() {
       if (!this.name) {
-        this.$message.error("名称为空...");
+        this.$message({
+          message: "名称为空...",
+          type: "error",
+          customClass: "myMsg"
+        });
         return;
       }
       if (!this.comment) {
-        this.$message.error("请输入留言...");
+        this.$message({
+          message: "请输入留言...",
+          type: "error",
+          customClass: "myMsg"
+        });
         return;
       }
       this.$confirm("确定提交评论吗？", "提示", {
@@ -71,7 +79,8 @@ export default {
       })
         .then(() => {
           this.$alert("留言功能完善中，敬请期待...", "提示", {
-            type: "warning"
+            type: "warning",
+            customClass: "myConfirm"
           });
         })
         .catch(e => console.log(e));

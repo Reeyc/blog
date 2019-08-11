@@ -1,7 +1,8 @@
 <!-- common of article -->
 <template>
   <div>
-    <div v-if="!article.notFound" class="article">
+    <!-- 文章已请求完毕、且文章存在 -->
+    <div v-if="!notFound && article" class="article">
       <div class="article-header">
         <p class="article-title">{{article.title}}</p>
         <div class="article-info">
@@ -26,7 +27,8 @@
         </li>
       </ul>
     </div>
-    <div v-else class="not-article">
+    <!-- 文章已请求完毕、但文章不存在 -->
+    <div v-else-if="notFound" class="not-article">
       <h2 class="tips">抱歉，您查看的文章已丢失，请浏览其他文章...</h2>
       <el-button type="text" @click="back">点此返回>></el-button>
       <img src="../../assets/img/404.jpg" class="tips-img" />
@@ -35,15 +37,17 @@
 </template>
 
 <script>
-import { cateFormat } from "js/cate";
+import category from "@/mixins/category";
 export default {
   data() {
     return {
-      article: { notFound: false },
-      cate: cateFormat
+      article: null,
+      notFound: false
     };
   },
+  mixins: [category],
   methods: {
+    //文章不存在、返回
     back() {
       this.$router.go(-1);
     }
@@ -56,7 +60,7 @@ export default {
       }
       res.article.content = decodeURIComponent(res.article.content); //解码
       this.article = res.article;
-      this.article.notFound = false;
+      this.notFound = false;
     });
   },
   //文章页的body呈白色

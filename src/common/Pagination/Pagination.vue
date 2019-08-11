@@ -1,6 +1,6 @@
 <template>
   <el-pagination
-    layout="prev, pager, next, jumper"
+    layout="total, prev, pager, next, jumper"
     :total="total"
     :page-size="pageSize"
     :pager-count="pageCount"
@@ -63,7 +63,12 @@ export default {
           color: #fff !important
         &:hover
           color: $theme-color
-  @media (max-width: 500px)
+@media (max-width: 500px)
+  .el-pagination
+    // 共xxx条
+    .el-pagination__total
+      display: none !important
+    // 页码
     .el-pager
       li
         &.more
@@ -73,6 +78,7 @@ export default {
           display: none
         &:first-child:not(.active)
           display: none
+    // 前往第[]页
     .el-pagination__jump
       margin-left: 10px
 </style>

@@ -17,3 +17,12 @@ input-color($circle, $fz)
     color: #5f5f5f
   &:-ms-input-placeholder
     color: #5f5f5f
+// #号标题前缀修饰
+prefix($fw = 400)
+  &::before
+    font-weight: $fw
+    position: absolute
+    top: 0
+    left: -15px
+    content: '#'
+    color: #eb5055
