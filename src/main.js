@@ -22,12 +22,14 @@ fastClick.attach(document.body);
 //#################################
 
 import hljs from "highlight.js";
-import 'highlight.js/styles/An-Old-Hope.css' //代码块选择 An-Old-Hope 主题颜色
+import 'highlight.js/styles/github.css'
 
 //自定义指令 
-Vue.directive('highlight', function (el) {
-  let blocks = el.querySelectorAll('pre');
-  blocks.forEach((block) => {
+Vue.directive('highlight', el => {
+  //IE不支持类数组调用forEach()
+  [].slice.call(el.querySelectorAll('pre')).forEach(block => {
+    //highlight总是乱识别语言，干脆自己将语言定死为[javascript]，注意一定要在highlightBlock()之前设置
+    block.className += " javascript";
     hljs.highlightBlock(block)
   })
 })

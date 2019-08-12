@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Header class="header"></Header>
-    <div class="main">
-      <!-- 2. v-if确保数据请求到了再加载页面 -->
-      <router-view v-if="article" :article="article" class="page" />
+    <Header id="header"></Header>
+    <div id="main">
+      <!-- 确保数据请求到了再加载页面 -->
+      <router-view v-if="article" :article="article" id="page" />
     </div>
     <comment v-if="$route.name==='article'"></comment>
-    <Footer :article="article" class="footer"></Footer>
+    <Footer :article="article" id="footer"></Footer>
     <back-top :visibility-height="100" :back-position="0" transition-name="fade" />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     return { article: null };
   },
   created() {
-    // 1. 大多数页面都需要all_article数据，在这里获取再传值，避免多个页面重复请求，缺点是路由切换不会实时获取数据，但刷新可以
+    //大多数页面都需要all_article数据，在这里获取再传值，避免多个页面重复请求，缺点是路由切换不会实时获取数据，但刷新可以
     this.$http.article.all_Article().then(res => {
       if (!res || res.code !== 1) return;
       this.article = res.article;
@@ -38,7 +38,7 @@ export default {
 html, body
   background-color: #f3f3f3
   width: 100%
-  .header
+  #header
     position: fixed
     top: 0
     left: 0
@@ -47,13 +47,16 @@ html, body
     max-width: 100%
     background-color: #fff
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)
-  .main
+  #main
     min-height: 500px
     padding-top: 60px
     margin: 0 auto
-    .page
+    #page
       animation: fade-in
       animation-duration: 0.5s
-  .footer
+  #footer
     background-color: #fff
+@media (min-width: 992px)
+  #main
+    width: 66.66667%
 </style>

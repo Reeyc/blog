@@ -78,12 +78,13 @@ export default {
         customClass: "myConfirm"
       })
         .then(() => {
-          this.$alert("留言功能完善中，敬请期待...", "提示", {
+          this.$message({
+            message: "留言功能完善中，敬请期待...",
             type: "warning",
             customClass: "myConfirm"
           });
         })
-        .catch(e => console.log(e));
+        .catch(e => {});
     }
   }
 };

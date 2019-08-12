@@ -187,10 +187,10 @@ export default {
     font-size: 18px
     margin: 100px 0
 @media (max-width: 800px)
-  .crumbs
+  .search
     font-size: 18px !important
 @media (max-width: 500px)
-  .crumbs
+  .search
     font-size: 14px !important
   .not-found
     font-size: 16px !important

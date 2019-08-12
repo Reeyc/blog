@@ -55,7 +55,7 @@ export default {
   created() {
     this.$http.article.detail_Article(this.$route.params.id).then(res => {
       if (!res || res.code !== 1) {
-        this.article.notFound = true;
+        this.notFound = true;
         return;
       }
       res.article.content = decodeURIComponent(res.article.content); //解码

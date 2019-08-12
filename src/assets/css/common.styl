@@ -1,3 +1,15 @@
+// 低版本浏览器提示信息
+.browsehappy
+    font-size: 20px
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 80px
+    text-align: center
+    line-height: 80px
+    background-color: pink
+    z-index: 9999
 // 路由加载进度条样式
 #nprogress .bar
     background: $theme-color !important
@@ -11,11 +23,23 @@
     margin: 20px 10px
 // 文章代码块样式
 .ql-syntax
-    padding: 20px !important
+    padding: 16px !important
     margin: 10px 0
     border-radius: 5px
     overflow: auto
-    background-color: #263238 !important
+// 引用文本块样式
+blockquote
+    padding: 10px 15px !important
+    margin: 10px 0 !important
+    border-left: 4px solid #eb5055
+    background-color: #f6f6f6
+// 文本高亮的样式
+.light
+    font-size: 14px !important
+    padding: 0 5px !important
+    color: #c7254e !important
+    background: #f9f2f4 !important
+    font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace !important
 code, pre
     color: #e4e7ed
     font-family: Consolas, Monaco, Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, monospace !important
@@ -50,6 +74,3 @@ code, pre
     .myMsg, .myConfirm
         min-width: 300px !important
         max-width: 300px !important
-@media (min-width: 992px)
-    .main
-        width: 66.66667%
