@@ -6,7 +6,7 @@
       <router-view v-if="article" :article="article" id="page" />
     </div>
     <comment v-if="$route.name==='article'"></comment>
-    <Footer :article="article" id="footer"></Footer>
+    <Footer v-if="article" :article="article" :comment="comment" id="footer"></Footer>
     <back-top :visibility-height="100" :back-position="0" transition-name="fade" />
   </div>
 </template>
@@ -19,13 +19,14 @@ import BackTop from "comm/BackTop/BackTop";
 export default {
   name: "App",
   data() {
-    return { article: null };
+    return { article: null, comment: null };
   },
   created() {
     //大多数页面都需要all_article数据，在这里获取再传值，避免多个页面重复请求，缺点是路由切换不会实时获取数据，但刷新可以
     this.$http.article.all_Article().then(res => {
       if (!res || res.code !== 1) return;
       this.article = res.article;
+      this.comment = res.comment;
     });
   },
   components: { Header, Footer, Comment, BackTop }

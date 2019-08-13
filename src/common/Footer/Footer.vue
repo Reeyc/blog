@@ -24,9 +24,17 @@
         </dl>
       </el-col>
       <el-col :span="7" :xs="0" :md="5" class="item">
-        <dl>
+        <dl v-if="comment && comment.length">
           <dt>最新评论</dt>
-          <dd>Hello 欢迎大家在底下评论</dd>
+          <dd
+            v-for="item of comment"
+            :key="item.create"
+            @click="toArticle(item.article_id)"
+          >{{item.content}}</dd>
+        </dl>
+        <dl v-else>
+          <dt>最新评论</dt>
+          <dd>暂无评论...</dd>
         </dl>
       </el-col>
     </el-row>
@@ -36,7 +44,13 @@
 <script>
 export default {
   props: {
+    //最新文章
     article: {
+      type: Array,
+      default: []
+    },
+    //最新评论
+    comment: {
       type: Array,
       default: []
     }
@@ -52,6 +66,7 @@ export default {
     };
   },
   methods: {
+    //跳转文章页
     toArticle(id) {
       if (!id) return;
       this.$router.push({

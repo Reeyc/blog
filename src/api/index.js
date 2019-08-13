@@ -3,7 +3,9 @@
  */
 
 import article from './module/article';
+import comment from './module/comment';
 
 export default {
-  article
+  article,
+  comment
 }

@@ -27,6 +27,7 @@ http.interceptors.request.use(
       text: 'loading...',
       background: 'rgba(0, 0, 0, 0.5)'
     });
+    config.headers.Authorization = true; //发送token
     return config;
   },
   err => Promise.reject(err))

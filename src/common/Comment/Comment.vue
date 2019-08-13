@@ -4,9 +4,9 @@
       <el-row class="contact">
         <el-col :span="12" class="item">
           <el-input
-            v-model="name"
+            v-model="comment.name"
             size="medium"
-            maxlength="10"
+            maxlength="8"
             show-word-limit
             prefix-icon="el-icon-user"
             clearable
@@ -15,7 +15,7 @@
         </el-col>
         <el-col :span="12" class="item">
           <el-input
-            v-model="email"
+            v-model="comment.email"
             size="medium"
             maxlength="30"
             show-word-limit
@@ -26,7 +26,7 @@
         </el-col>
       </el-row>
       <el-input
-        v-model="comment"
+        v-model="comment.content"
         type="textarea"
         :rows="7"
         resize="none"
@@ -50,14 +50,19 @@
 export default {
   data() {
     return {
-      name: "",
-      email: "",
-      comment: ""
+      //发送请求的数据
+      comment: {
+        id: "",
+        name: "",
+        email: "",
+        content: ""
+      }
     };
   },
   methods: {
     submit() {
-      if (!this.name) {
+      // 未填名称
+      if (!this.comment.name) {
         this.$message({
           message: "名称为空...",
           type: "error",
@@ -65,7 +70,8 @@ export default {
         });
         return;
       }
-      if (!this.comment) {
+      // 未填内容
+      if (!this.comment.content) {
         this.$message({
           message: "请输入留言...",
           type: "error",
@@ -73,15 +79,27 @@ export default {
         });
         return;
       }
+      // 确认提交
       this.$confirm("确定提交评论吗？", "提示", {
         iconClass: "el-icon-question",
         customClass: "myConfirm"
       })
         .then(() => {
-          this.$message({
-            message: "留言功能完善中，敬请期待...",
-            type: "warning",
-            customClass: "myConfirm"
+          // 发送请求
+          this.comment.id = this.$route.params.id;
+          this.$http.comment.add_comment(this.comment).then(res => {
+            if (!res || res.code !== 1) return;
+            // 评论添加成功，派发给Article组件
+            this.$bus.$emit("addComment", res);
+            // 清空评论框
+            Object.keys(this.comment).forEach(
+              item => (this.comment[item] = "")
+            );
+            this.$message({
+              message: res.message,
+              type: "success",
+              customClass: "myMsg"
+            });
           });
         })
         .catch(e => {});
@@ -113,7 +131,7 @@ export default {
 @media (min-width: 992px)
   .container
     width: 66.66667% !important
-@media (max-width: 500px)
+@media (max-width: 700px)
   .container
     padding: 25px !important
     .submit

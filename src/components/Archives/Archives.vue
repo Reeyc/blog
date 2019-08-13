@@ -116,11 +116,11 @@ export default {
       &:hover
         color: $theme-color
 @media (max-width: 1400px)
-  .main
+  .content
     .item
       width: 44% !important
 @media (max-width: 700px)
-  .main
+  .content
     .item
       width: 100% !important
 </style>

@@ -16,13 +16,13 @@
         <br />
         <div v-if="article.update" class="update">文章最后更新于：{{article.update}}</div>
       </div>
+      <!-- 评论区 -->
       <ul class="comment-list">
-        <li v-for="item of 3" :key="item" class="item">
-          <img src="http://www.hellomk.cn/admin/img/avatar.jpg" class="avatar" />
+        <li v-for="item of comment" :key="item.create" class="item">
           <div class="info">
-            <p class="name">二乎乎</p>
-            <p class="comment">写的不错，点赞...</p>
-            <p class="time">2019-8-7 22:26</p>
+            <p class="name">{{item.name}}</p>
+            <p class="comment">{{item.content}}</p>
+            <p class="time">{{item.create}}</p>
           </div>
         </li>
       </ul>
@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       article: null,
+      comment: [],
       notFound: false
     };
   },
@@ -59,9 +60,17 @@ export default {
         return;
       }
       res.article.content = decodeURIComponent(res.article.content); //解码
-      this.article = res.article;
+      this.article = res.article; //获取文章
+      res.comment && (this.comment = res.comment); //获取评论
       this.notFound = false;
     });
+  },
+  mounted() {
+    //有新评论（评论组件在外部，可通过组件传值来通信）
+    this.$bus.$on(
+      "addComment",
+      data => data.id === this.$route.params.id && this.comment.unshift(data)
+    );
   },
   //文章页的body呈白色
   beforeRouteEnter(to, from, next) {
@@ -103,25 +112,22 @@ export default {
       position: relative
       display: flex
       align-items: center
-      padding: 8px
+      padding: 8px 15px
       margin: 8px 0
+      border-radius: 5px
       background-color: #f5f5f5
-      .avatar
-        width: 50px
-        height: 50px
-        border-radius: 50%
-        margin-right: 10px
-        cursor: pointer
       .info
         .name
           font-weight: bold
         .comment
           font-size: 13px
+          word-wrap: break-word
+          word-break: break-all
         .time
           font-size: 12px
           position: absolute
           top: 8px
-          right: 8px
+          right: 15px
 .not-article
   text-align: center
   .tips
@@ -130,7 +136,7 @@ export default {
     margin: 50px 0 10px
   .tips-img
     width: 100%
-@media (max-width: 500px)
+@media (max-width: 700px)
   .article
     padding: 20px 25px
     .article-info
