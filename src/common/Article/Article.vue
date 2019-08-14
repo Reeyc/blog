@@ -8,7 +8,7 @@
         <div class="article-info">
           <div class="create">发表于：{{article.create}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           <div class="category">发布在：{{cate(article.category)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          <div class="comme">评论：0 条评论</div>
+          <div class="comme">评论：{{comment.length}} 条评论</div>
         </div>
       </div>
       <div class="article-content">
@@ -20,7 +20,7 @@
       <ul class="comment-list">
         <li v-for="item of comment" :key="item.create" class="item">
           <div class="info">
-            <p class="name">{{item.name}}</p>
+            <p class="name">{{item.name}}：</p>
             <p class="comment">{{item.content}}</p>
             <p class="time">{{item.create}}</p>
           </div>
@@ -102,6 +102,7 @@ export default {
       &>*
         float: left
   .article-content
+    letter-spacing: 0.03em
     min-height: 300px
     padding-bottom: 25px
     border-bottom: 1px solid #e0e0e0
@@ -148,6 +149,8 @@ export default {
 </style>
 <style lang="stylus">
 .article-content
+  h1, h2, h3, h4, h5, h6
+    line-height: 2.8 !important
   img
     max-width: 100% !important
     width: 100% !important

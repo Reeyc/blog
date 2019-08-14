@@ -1,7 +1,4 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
+Vue.use(VueRouter)
 
 const Home = r => require.ensure([], () => r(require('@/components/Home/Home')), 'Home')
 const Diary = r => require.ensure([], () => r(require('@/components/Diary/Diary')), 'Diary')
@@ -11,7 +8,8 @@ const Search = r => require.ensure([], () => r(require('@/components/Search/Sear
 const Article = r => require.ensure([], () => r(require('@/common/Article/Article')), 'Article')
 const NotFound = r => require.ensure([], () => r(require('@/common/NotFound/NotFound')), 'NotFound')
 
-export default new Router({
+
+export default new VueRouter({
   routes: [{
     path: '/',
     redirect: "/home"

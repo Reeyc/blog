@@ -2,7 +2,6 @@
  * axios封装
  * 请求拦截、响应拦截、错误处理
  */
-import axios from 'axios';
 import {
   Loading
 } from 'element-ui'

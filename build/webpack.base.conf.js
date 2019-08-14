@@ -25,7 +25,8 @@ module.exports = {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
     'axios': 'axios',
-    'element-ui': 'ELEMENT'
+    'element-ui': 'ELEMENT',
+    'hightlight.js': 'hljs',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
