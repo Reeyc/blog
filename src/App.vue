@@ -37,8 +37,9 @@ export default {
 @import '~css/variable.styl'
 @import '~css/common.styl'
 html, body
-  background-color: #f3f3f3
   width: 100%
+  position: relative
+  background-color: #f3f3f3
   #header
     position: fixed
     top: 0

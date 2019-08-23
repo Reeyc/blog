@@ -15,7 +15,9 @@
         placeholder="选择类别..."
         class="select"
       >
-        <el-option label="全部" value="all"></el-option>
+        <el-option-group>
+          <el-option label="全部" value="all"></el-option>
+        </el-option-group>
         <el-option-group v-for="group of sele" :key="group.title" :label="group.title">
           <el-option
             v-for="(item,index) of group.content"

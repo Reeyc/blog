@@ -151,9 +151,15 @@ export default {
 .article-content
   h1, h2, h3, h4, h5, h6
     line-height: 2.8 !important
+  li
+    list-style: outside !important
   img
     max-width: 100% !important
     width: 100% !important
+  .hljs-keyword, .hljs-selector-tag, .hljs-subst
+    font-weight: normal !important
+  .hljs-comment
+    font-style: normal !important
 </style>
 
 
